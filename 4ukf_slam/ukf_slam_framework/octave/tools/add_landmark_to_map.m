@@ -23,7 +23,7 @@ sigma = blkdiag(sigma, Q);
 % Transform from [range, bearing] to the x/y location of the landmark
 % This operation intializes the uncertainty in the position of the landmark
 % Sample sigma points
-sig_pnts_new = compute_sigma_points(mu, sigma);
+sig_pnts_new = compute_sigma_points(mu, sigma)
 % Normalize!
 sig_pnts_new(3,:) = normalize_angle(sig_pnts_new(3,:));
 % Compute the xy location of the new landmark according to each sigma point

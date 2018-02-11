@@ -51,6 +51,11 @@ for t = 1:size(data.timestep, 2)
 
     %Generate visualization plots of the current state of the filter
     plot_state(mu, sigma, landmarks, t, map, data.timestep(t).sensor, showGui);
+    figure(2)
+    heatmap(sigma)
+    figure(3)
+    plot(mu,'ro')
+    figure(1)
     disp("Current state vector mu ="), disp(mu)
     disp("Map contains the following landmarks:"), disp(map)
 
