@@ -61,6 +61,18 @@ for t = 1:size(data.timestep, 2)
 
     %Generate visualization plots of the current state of the filter
     plot_state(mu, sigma, landmarks, t, observedLandmarks, data.timestep(t).sensor, showGui);
+    
+    %heatmap of covariance 
+    figure(2)
+    heatmap(sigma);
+    filename = sprintf('../plots/covariance_%03d.png', t);
+    print(filename, '-dpng');
+    figure(3)
+    heatmap(inv(sigma));
+    filename = sprintf('../plots/infor_%03d.png', t);
+    print(filename, '-dpng');
+    
+    figure(1)
     disp("Current state vector:")
     disp("mu = "), disp(mu)
 end

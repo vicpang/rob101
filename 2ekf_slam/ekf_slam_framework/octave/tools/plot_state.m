@@ -40,4 +40,6 @@ function plot_state(mu, sigma, landmarks, timestep, observedLandmarks, z, window
       filename = sprintf('../plots/ekf_%03d.png', timestep);
       print(filename, '-dpng');
     end
+    
+    
 end
