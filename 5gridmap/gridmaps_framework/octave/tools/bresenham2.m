@@ -1,4 +1,4 @@
-function [X,Y] = bresenham(mycoords)
+function [X,Y] = bresenham2(mycoords)
 
 % BRESENHAM: Generate a line profile of a 2d image 
 %            using Bresenham's algorithm
@@ -24,7 +24,7 @@ steep = (abs(y(2)-y(1)) > abs(x(2)-x(1)));
 
 if steep, [x,y] = swap(x,y); end
 
-if x(1)>x(2)
+if x(1)>x(2), 
     [x(1),x(2)] = swap(x(1),x(2));
     [y(1),y(2)] = swap(y(1),y(2));
 end
@@ -46,7 +46,7 @@ for n = 1:delx+1
     x_n = x_n + 1;
     error = error + dely;
     if 2*error >= delx
-   % if bitshift(error,1) >= delx % same as -> if 2*error >= delx, 
+    %if bitshift(error,1) >= delx % same as -> if 2*error >= delx, 
         y_n = y_n + ystep;
         error = error - delx;
     end    

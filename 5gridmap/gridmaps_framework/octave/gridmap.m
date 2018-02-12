@@ -4,8 +4,8 @@ close all
 clear all
 
 % Load laser scans and robot poses.
-load("../data/laser")
-%laser = read_robotlaser('../data/csail.log');
+%load("../data/laser")
+laser = read_robotlaser('../data/csail.log');
 
 % Extract robot poses: Nx3 matrix where each row is in the form: [x y theta]
 poses = [laser.pose];
@@ -45,7 +45,7 @@ offset = [offsetX; offsetY];
 
 % Main loop for updating map cells.
 % You can also take every other point when debugging to speed up the loop (t=1:2:size(poses,1))
-for(t=1:size(poses,1))
+for t=1:size(poses,1) 
 	t
 	% Robot pose at time t.
 	robPose = [poses(t,1);poses(t,2);poses(t,3)];
@@ -55,10 +55,12 @@ for(t=1:size(poses,1))
 	% Compute the mapUpdate, which contains the log odds values to add to the map.
 	[mapUpdate, robPoseMapFrame, laserEndPntsMapFrame] = inv_sensor_model(map, sc, robPose, gridSize, offset, probOcc, probFree);
 
-	mapUpdate -= logOddsPrior*ones(size(map));
+	mapUpdate =mapUpdate- logOddsPrior*ones(size(map));
 	% Update the occupancy values of the affected cells.
-	map += mapUpdate;
+	map =map+ mapUpdate;
 	
 	% Plot current map and robot trajectory so far.
-        plot_map(map, mapBox, robPoseMapFrame, poses, laserEndPntsMapFrame, gridSize, offset, t);
-endfor
+    figure(1)
+    %imagesc(map')   
+     plot_map(map, mapBox, robPoseMapFrame, poses, laserEndPntsMapFrame, gridSize, offset, t);
+end
