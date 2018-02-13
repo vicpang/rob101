@@ -20,7 +20,11 @@ for i = 1:numParticles
   particles(i).history{end+1} = particles(i).pose;
 
   % TODO: sample a new pose for the particle
-  
+  mu = particles(i).pose + [u.t*cos(u.r1+particles(i).pose(3)); u.t*sin(u.r1+particles(i).pose(3)); normalize_angle(u.r1+u.r2)];
+  mu(3) = normalize_angle(mu(3));
+  particles(i).pose(1) = normrnd(mu(1),r1Noise+transNoise+r2Noise);
+  particles(i).pose(2) = normrnd(mu(2),r1Noise+transNoise+r2Noise);
+  particles(i).pose(3) = normrnd(mu(3),r1Noise+r2Noise);
 
 end
 

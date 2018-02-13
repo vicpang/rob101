@@ -12,7 +12,7 @@ particles = struct;
 for i = 1:numParticles
   particles(i).weight = 1. / numParticles;
   particles(i).pose = normrnd([0 0]', [1 2]');
-  particles(i).history = cell();
+  particles(i).history = cell(0);
 end
 
 
@@ -27,4 +27,9 @@ resampledParticles = resample(particles);
 % plot the particles before (red) and after resampling (blue)
 bpos = [particles.pose];
 apos = [resampledParticles.pose];
-plot(bpos(1,:), bpos(2,:), 'r+', 'markersize', 5, apos(1,:), apos(2,:), 'b*', 'markersize', 5);
+figure(1)
+plot(bpos(1,:),bpos(2,:),'r+');
+hold on ;
+plot(apos(1,:),apos(2,:),'b*');
+legend('before resample','after resample');
+%plot(bpos(1,:), bpos(2,:), 'r+', 'markersize', 5, apos(1,:), apos(2,:), 'b*', 'markersize', 5);

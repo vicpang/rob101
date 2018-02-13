@@ -20,18 +20,18 @@ particles = struct;
 for i = 1:numParticles
   particles(i).weight = 1. / numParticles;
   particles(i).pose = zeros(3,1);
-  particles(i).history = cell();
+  particles(i).history = cell(0);
 end
 
 % Perform filter update for each odometry-observation read from the
 % data file.
 for t = 1:size(data.timestep, 2)
 %for t = 1:50
-    printf('timestep = %d\n', t);
+    t
 
     % Perform the prediction step of the particle filter
     particles = prediction_step(particles, data.timestep(t).odometry, noise);
-
+    particles = resample(particles);
     % Generate visualization plots of the current state of the filter
     plot_state(particles, t);
 end

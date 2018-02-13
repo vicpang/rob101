@@ -17,11 +17,11 @@ function plot_state(particles, timestep)
     %window = true;
     window = false;
     if window
-      figure(1, "visible", "on");
+      figure(1);
       drawnow;
       pause(0.5);
     else
-      figure(1, "visible", "off");
+      figure(1);
       filename = sprintf('../plots/pf_%03d.png', timestep);
       print(filename, '-dpng');
     end
