@@ -8,6 +8,8 @@ numParticles = length(particles);
 
 w = [particles.weight];
 
+
+
 % normalize the weight
 w = w / sum(w);
 
@@ -26,7 +28,7 @@ if useNeff
   end
 end
 
-newParticles = struct;
+newParticles = struct('weight',1./numParticles,'pose',zeros(3,1),'history',cell(0),'landmarks',struct);
 
 % TODO: implement the low variance re-sampling
 
@@ -41,15 +43,17 @@ idx = 1;
 
 % walk along the wheel to select the particles
 for i = 1:numParticles
-  position += step;
+  position =position+ step;
   if (position > weightSum)
-    position -= weightSum;
+    position =position- weightSum;
     idx = 1;
   end
   while (position > cs(idx))
-    idx++;
+    idx=idx+1;
   end
+  particles(idx)
   newParticles(i) = particles(idx);
+  
   newParticles(i).weight = 1/numParticles;
 end
 

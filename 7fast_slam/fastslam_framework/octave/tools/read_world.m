@@ -14,19 +14,17 @@ function landmarks = read_world(filename)
     %   landmarks(5).x
     input = fopen(filename);
 
-    landmarks = struct;
-
-    while(!feof(input))
+       
+    landmarks = struct('id',0,'x',0,'y',0);
+    i=0;
+    while(~feof(input))
         line = fgetl(input);
         data = strsplit(line, ' ');
 
-        landmark = struct(
-            "id", str2double(data{1}),
-            "x" , str2double(data{2}),
-            "y" , str2double(data{3})
-        );
+        landmark = struct('id', str2double(data{1}),'x' , str2double(data{2}),'y' , str2double(data{3}));
         landmarks(end+1) = landmark;
-    endwhile
+        
+    end 
 
     landmarks = landmarks(2:end);
 

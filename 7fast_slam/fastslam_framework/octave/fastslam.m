@@ -35,7 +35,7 @@ particles = struct;
 for i = 1:numParticles
   particles(i).weight = 1. / numParticles;
   particles(i).pose = zeros(3,1);
-  particles(i).history = cell();
+  particles(i).history = cell(0);
   for l = 1:N % initialize the landmarks aka the map
     particles(i).landmarks(l).observed = false;
     particles(i).landmarks(l).mu = zeros(2,1);    % 2D position of the landmark
@@ -51,7 +51,7 @@ showGui = false; % plot to files instead
 % data file.
 for t = 1:size(data.timestep, 2)
 %for t = 1:50
-    printf('timestep = %d\n', t);
+   
 
     % Perform the prediction step of the particle filter
     particles = prediction_step(particles, data.timestep(t).odometry, noise);

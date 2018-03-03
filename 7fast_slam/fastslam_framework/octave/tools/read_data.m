@@ -42,10 +42,10 @@ function data = read_data(filename)
     data.timestep.sensor = struct;
     first = 1;
 
-    odom = struct;
-    sensor = struct;
-
-    while(!feof(input))
+    odom = [];
+    sensor =struct('id',0,'range',0,'bearing',0);
+  
+    while(~feof(input))
         line = fgetl(input);
         arr = strsplit(line, ' ');
         type = deblank(arr{1});
@@ -54,9 +54,9 @@ function data = read_data(filename)
             if(first == 0)
                 data.timestep(end+1).odometry = odom;
                 data.timestep(end).sensor = sensor(2:end);
-                odom = struct;
-                sensor = struct;
-            endif
+                odom = struct('r1',0,'t',0,'r2',0);
+                sensor = struct('id',0,'range',0,'bearing',0);
+            end
             first = 0;
             odom.r1 = str2double(arr{2});
             odom.t  = str2double(arr{3});
@@ -67,8 +67,8 @@ function data = read_data(filename)
             reading.range   = str2double(arr{3});
             reading.bearing = str2double(arr{4});
             sensor(end+1) = reading;
-        endif
-    endwhile
+       end
+     end
 
     data.timestep = data.timestep(2:end);
 

@@ -23,7 +23,7 @@ function plot_state(particles, landmarks, timestep, z, window)
     [bestWeight, bestParticleIdx] = max([particles.weight]);
 
     % draw the landmark locations along with the ellipsoids
-    for(i=1:length(particles(bestParticleIdx).landmarks))
+    for i=1:length(particles(bestParticleIdx).landmarks)
         if(particles(bestParticleIdx).landmarks(i).observed)
           l = particles(bestParticleIdx).landmarks(i).mu;
           plot(l(1), l(2), 'bo', 'markersize', 3);
@@ -32,7 +32,7 @@ function plot_state(particles, landmarks, timestep, z, window)
     end
 
     % draw the observations
-    for(i=1:size(z,2))
+    for i=1:size(z,2) 
       l = particles(bestParticleIdx).landmarks(z(i).id).mu;
       line([particles(bestParticleIdx).pose(1), l(1)],[particles(bestParticleIdx).pose(2), l(2)], 'color', 'k', 'linewidth', 1);
     end
@@ -49,11 +49,11 @@ function plot_state(particles, landmarks, timestep, z, window)
 
     % dump to a file or show the window
     if window
-      figure(1, "visible", "on");
+      figure(1);
       drawnow;
       pause(0.1);
     else
-      figure(1, "visible", "off");
+      figure(1);
       filename = sprintf('../plots/fastslam_%03d.png', timestep);
       print(filename, '-dpng');
     end

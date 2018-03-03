@@ -3,11 +3,12 @@ function [phiNorm] = normalize_angle(phi)
 
 while(phi>pi)
 	phi = phi - 2*pi;
-endwhile
+end
 
 while(phi<-pi)
 	phi = phi + 2*pi;
-endwhile
-phiNorm = phi;
-
 end
+phiNorm = phi;
+end
+
+
