@@ -6,17 +6,22 @@ function nnz = nnz_of_graph(g)
 nnz = 0;
 
 % elements along the diagonal
-for [value, key] = g.idLookup
-  nnz += value.dimension^2;
+%for [value, key] = g.idLookup
+fields=fieldnames(g.idLookup);
+
+for i =1:numel(fields)
+    key=fields{i};
+    value=g.idLookup.(key); 
+    nnz =nnz+ value.dimension^2;
 end
 
 % off-diagonal elements
 for eid = 1:length(g.edges)
   edge = g.edges(eid);
-  if (strcmp(edge.type, 'P') != 0)
-    nnz += 2 * 9;
-  elseif (strcmp(edge.type, 'L') != 0)
-    nnz += 2 * 6;
+  if (strcmp(edge.type, 'P') ~= 0)
+    nnz =nnz+ 2 * 9;
+  elseif (strcmp(edge.type, 'L') ~= 0)
+    nnz =nnz+ 2 * 6;
   end
 end
 
