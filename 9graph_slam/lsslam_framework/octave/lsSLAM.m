@@ -7,10 +7,10 @@ addpath('tools');
 % load the graph into the variable g
 % only leave one line uncommented
 
-%g=importdata('../data/simulation-pose-pose.dat');
+g=importdata('../data/simulation-pose-pose.dat');
 %g=importdata('../data/simulation-pose-landmark.dat');
 %g=importdata('../data/intel.dat');
-g=importdata('../data/dlr.dat');
+%g=importdata('../data/dlr.dat');
 
 % simulation datasets
 %load ../data/simulation-pose-pose.dat

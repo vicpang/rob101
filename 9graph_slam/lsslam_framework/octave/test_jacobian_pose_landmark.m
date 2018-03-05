@@ -30,11 +30,11 @@ scalar = 1 / (2*delta);
 ANumeric = zeros(2,3);
 for d = 1:3
   curX = x1;
-  curX(d) += delta;
+  curX(d) =curX(d) + delta;
   err = linearize_pose_landmark_constraint(curX, x2, z);
   curX = x1;
-  curX(d) -= delta;
-  err -= linearize_pose_landmark_constraint(curX, x2, z);
+  curX(d) =curX(d) - delta;
+  err =err - linearize_pose_landmark_constraint(curX, x2, z);
 
   ANumeric(:, d) = scalar * err;
 end
@@ -54,11 +54,11 @@ end
 BNumeric = zeros(2,2);
 for d = 1:2
   curX = x2;
-  curX(d) += delta;
+  curX(d) =curX(d) + delta;
   err = linearize_pose_landmark_constraint(x1, curX, z);
   curX = x2;
-  curX(d) -= delta;
-  err -= linearize_pose_landmark_constraint(x1, curX, z);
+  curX(d) =curX(d) - delta;
+  err =err - linearize_pose_landmark_constraint(x1, curX, z);
 
   BNumeric(:, d) = scalar * err;
 end
